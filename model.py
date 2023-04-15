@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-
+from flask_login import UserMixin
 db = SQLAlchemy()
 
 class User(db.Model):
@@ -29,7 +29,7 @@ class Todo(db.Model):
                         autoincrement=True,
                         primary_key=True)
     description = db.Column(db.String)
-    img = db.Column(db.String)
+    img = db.Column(db.String,nullable=True)
     notes = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
     category_id = db.Column(db.Integer, db.ForeignKey("categories.category_id"))
@@ -52,7 +52,7 @@ class Todo_item(db.Model):
                         primary_key=True)
     todo_item_name = db.Column(db.String, unique=True)
     due_date = db.Column(db.DateTime)
-    completed = db.Column(db.Boolean)
+    completed = db.Column(db.Boolean,default=False)
     todo_list_id = db.Column(db.Integer, db.ForeignKey("todo_list.todo_list_id"))
 
 

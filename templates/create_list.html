@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Create a new list{% endblock %}
+
+{% block body %}
+
+<h2>Create a new list</h2>
+<form action="/create/" method='POST'>
+  <p>
+    Description <input type="text" name="description">
+  </p>
+  <p>
+    Notes <input type="text" name="notes">
+  </p>
+<label for="category">Category</label>
+<select name = "category" id="category">
+    <option value ="Work">Work</option>
+    <option value = "Grocery">Grocery</option>
+    <option value = "Personal">Personal</option>
+    <option value = "Travel">Travel</option>
+    <option value = "Finance">Finance</option>
+</select>
+<input type="hidden" name="image_url">
+<img id="image-preview" style="display: none; margin-top: 10px;">
+  <p>
+    <input type="submit">
+  </p>
+</form>
+<script src="/static/create.js"> </script>
+
+
+
+{% endblock %}

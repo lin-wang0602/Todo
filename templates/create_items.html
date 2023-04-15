@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Create an Item{% endblock %}
+
+{% block body %}
+
+<h2>Create new item</h2>
+<form action="/todos/{{ todo_list_id }}/create_item" method='POST'>
+  <p>
+    Name <input type="text" name="name">
+  </p>
+  <p>
+    Due date <input type="datetime-local" name="date">
+  </p>
+  <p>
+    Completed: <input type="checkbox" name="completed">
+  </p>
+  <p>
+    <input type="submit">
+  </p>
+</form>
+
+{% endblock %}

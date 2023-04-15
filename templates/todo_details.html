@@ -1,24 +1,28 @@
 {% extends 'base.html' %}
-{% block title %}Todos{% endblock %}
+{% block title %}Todo-detail{% endblock %}
 {% block body %}
-<h1>Todo list</h1>
-
+<h1>List Name: {{ todo.description}}</h1>
+<img id="todo" src="{{ todo.img }}">
+<p><a href='/todos/{{ todo.todo_list_id}}/create_item' style="text-decoration: none;">Create more items </a></p>
 <table>
-    
+    <thead>
+    <tr>
+        <th><h3>Todo_Item</h3></th>
+        <th><h3>Due_date</h3></th>
+        <th><h3>Completed</h3></th>
+        <th><h3>Action</h3></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        {% for item in items %}
+        <td>{{ item.todo_item_name}}</td></a>
+        <td class="todo-item" >{{ item.due_date.strftime('%a, %b %d, %Y %I:%M %p')}}</td>
+        <td>{{ item.completed}}</td>
+        <td><a href ="/todos/{{ todo.todo_list_id}}/items/{{ item.todo_item_id}}/update" style="text-decoration: none;">Edit</a></td>
+    </tr>
+        {% endfor %}
+    </tbody>
 </table>
-<h2>Description</h2>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus eius cumque cum sequi neque rerum! Facilis officia explicabo neque iste hic necessitatibus optio deserunt omnis laboriosam saepe, maxime maiores deleniti?</p>
-
-<img>
-<h2>Notes</h2>
-<p>Hello </p>
-
-
-
-
-
-
-
-
-
+<script src="/static/dueDate.js"></script>
 {% endblock %}

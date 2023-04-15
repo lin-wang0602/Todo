@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Todos{% endblock %}
+{% block body %}
+<div class="detail">
+<h1>Todo list</h1>
+<p><a href='/create' style="text-decoration: none;">Create a new list </a></p>
+<table>
+    <thead>
+    <tr>
+        <th><h2>Description</h2></th>
+        <th><h2>Notes</h2></th>
+        <th><h2>Category</h2></th>
+        <th><h2>Actions</h2></th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for todo in todos %}
+    <tr>
+        <td>
+        <a href="/todos/{{ todo.todo_list_id }}"style="text-decoration: none;">
+        {{ todo.description }}</a></td>
+        <td>{{ todo.notes }}</td>
+        {% if todo.categories %}
+        <td>{{ todo.categories.category_name }}</td>
+        {% else %}
+        <td>No category assigned</td>
+        {% endif %}
+        <td>
+            <form action="/delete_todo/{{ todo.todo_list_id}}" method="POST">
+                <button class="delete-todo" type="submit" todo_list_id="{{ todo.todo_list_id }}">Delete</button>
+            </form>
+        </td>
+
+    </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+<script src="/static/todo.js"> </script>
+
+
+
+
+{% endblock %}
