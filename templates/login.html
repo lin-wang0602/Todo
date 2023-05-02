@@ -3,38 +3,52 @@
 
 {% block body %}
 
-<h2 id="create-account">Create an Account</h2>
+<div class="d-flex justify-content-center align-items-center" style="height:100vh;">
+<div class="login-and-create mx-auto">
+  <div id="btn">
+    <button id="login-button">Log In</button>
+    <button id="create-user-button">Register</button>
+
+    </div>
+<h2 id="create-account" style="margin-top: 30px;">Register</h2>
 <form id="create-user-form" action="/users" method="POST">
   <p>
-    Email <input type="text" name="email" required>
+    Email <input type="text" class="form-control"name="email" required>
   </p>
 
   <p>
-    Password <input type="password" name="password" id ="password"autocomplete="on" required>
+    Password <input type="password" class="form-control"name="password" id ="password" autocomplete="on" required>
+    <input type="checkbox" onclick="PasswordVisibility()"> Show Password
+
   </p>
   <p>
-    <input type="submit" value="Create Account">
+    <input type="submit" value="Register">
   </p>
 </form>
 
-<h2 id="login">Log In</h2>
+<h2 id="login" style="margin-top: 30px;">Log In</h2>
 <form id="login-form" action="/todos" method="POST">
   <p>
-    Email <input type="text" name="email" required>
+    Email <input type="text" class="form-control" name="email" required>
   </p>
 
   <p>
-    Password <input type="password" name="password" autocomplete="on" required>
+    Password <input type="password" class="form-control" name="password" id="user-password"autocomplete="on" required>
+
+    <input type="checkbox" onclick="togglePasswordVisibility()"> Show Password
   </p>
 
   <p>
     <input type="submit" value="Log In">
   </p>
 </form>
-<button id="create-user-button">Create Account</button>
-<button id="login-button">Log In</button>
+
+</div>
+</div>
 
 <script src="/static/todo.js"> </script>
+<script src="/static/login.js"> </script>
+
 
 
 {% endblock %}

@@ -1,10 +1,9 @@
 from flask import (Flask, render_template, request, flash, session,redirect, jsonify)
-from model import connect_to_db, db,User,Todo_item,Todo
+from model import connect_to_db, db,User,Todo_item,Todo,Category
 import crud
 import os
 from jinja2 import StrictUndefined
 from datetime import datetime
-from flask_login import LoginManager,login_user,current_user,login_required
 import requests
 
 
@@ -26,6 +25,29 @@ def homepage():
 def login():
 
     return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    flash("You have successfully logout")
+    return redirect("/login")
+
+@app.route('/change_password', methods=["GET","POST"])
+def change_password():
+    logged_in_email = session.get("user_email")
+    user = crud.get_user_by_email(logged_in_email)
+    current_password = user.password
+    if request.method == "POST":
+        current_password = request.form.get("curr_password")
+        new_password=request.form.get("new_password")
+        if current_password == user.password:
+            user.password = new_password
+            db.session.commit()
+            flash('Updated password suceessfully!')
+            return redirect("/todos")
+        else:
+            flash("Current password is not match! ")
+
+    return render_template("change_pass.html",user=user)
 
 @app.route("/users", methods=["POST"])
 def register_user():
@@ -49,9 +71,20 @@ def register_user():
 @app.route('/todos')
 def detail():
     logged_in_email = session.get("user_email")
+    categories =Category.query.all()
     user = crud.get_user_by_email(logged_in_email)
     todos = crud.get_all_todos_by_user_id(user.user_id)
-    return render_template("all_todos.html",todos=todos)
+    items = Todo_item.query.all()
+    all_completed = {}
+    for todo in todos:
+        completed = True
+        for item in todo.todo_items:
+            if not item.completed:
+                completed = False
+        all_completed[todo] = completed
+
+    return render_template("all_todos.html",todos=todos,categories=categories,items=items,all_completed=all_completed)
+
 
 @app.route('/todos',methods=["POST"])
 def todo_detail():

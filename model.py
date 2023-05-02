@@ -1,5 +1,4 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
 db = SQLAlchemy()
 
 class User(db.Model):
@@ -50,7 +49,7 @@ class Todo_item(db.Model):
     todo_item_id = db.Column(db.Integer,
                         autoincrement=True,
                         primary_key=True)
-    todo_item_name = db.Column(db.String, unique=True)
+    todo_item_name = db.Column(db.String)
     due_date = db.Column(db.DateTime)
     completed = db.Column(db.Boolean,default=False)
     todo_list_id = db.Column(db.Integer, db.ForeignKey("todo_list.todo_list_id"))
@@ -74,9 +73,10 @@ class Category(db.Model):
     todo_lists = db.relationship("Todo", back_populates="categories")
 
 
+
 def connect_to_db(flask_app, db_uri="postgresql:///todos", echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
-    flask_app.config["SQLALCHEMY_ECHO"] = True
+    flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.app = flask_app

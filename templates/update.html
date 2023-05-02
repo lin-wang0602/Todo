@@ -2,21 +2,38 @@
 {% block title %}update an Item{% endblock %}
 
 {% block body %}
-
-<h2>Update an item</h2>
+<nav class="nav mt-3">
+  <a class="nav-link " href="/">Task Master</a>
+  <a class="nav-link" href='/todos/{{ todo.todo_list_id}}' style="text-decoration: none;">Todo List</a>
+  <a class="nav-link" href="/logout" style="text-decoration: none;"><i class="bi bi-box-arrow-right"></i>Logout</a>
+  <a class="nav-link ms-auto" href="/change_password"><h5><i class="bi bi-person-fill"></i></h5>change password ?</a>
+</nav>
+<section class="update-bk">
+<div class="d-flex justify-content-center align-items-center" style="height:100vh;">
+  <div class="col-md-2">
+<h2 class="text-center">Update an item</h2>
 <form action="/todos/{{ todo.todo_list_id}}/items/{{ item.todo_item_id}}/update" method='POST'>
-  <p>
-    Name <input type="text" name="name" value="{{ item.todo_item_name}}">
-  </p>
-  <p>
-    Due date <input type="datetime-local" name="date" value = "{{ item.due_date}}">
-  </p>
-  <p>
-    Completed: <input type="checkbox" name="completed" {%if item.completed%} checked {% endif %}>
-  </p>
-  <p>
+<div class="form-group">
+  <label for ="name">Name</label>
+  <input type="text" name="name" class="form-control" value="{{ item.todo_item_name}}">
+  </div>
+  <div class="form-group">
+  <label for="due_date">Due Date</label>
+  <input type="datetime-local" name="date" class="form-control" value = "{{ item.due_date}}">
+  </div>
+  <div class="form-group" style="margin-top: 10px;">
+    <label for="Completed">Completed</label>
+    <input type="checkbox"  name="completed" {%if item.completed%} checked {% endif %}>
+  </div>
+  <div class="form-group d-flex justify-content-center" style="margin-top: 10px;">
     <input type="submit" value="Update">
-  </p>
+    </div>
 </form>
+</div>
+</div>
+</div>
+</section>
+
+
 
 {% endblock %}

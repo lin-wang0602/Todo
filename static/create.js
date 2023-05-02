@@ -12,7 +12,6 @@ categorySelect.addEventListener('change', () => {
       fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
           const photos = data.photos
           //get the random photo
           const randomIndex = Math.floor(Math.random() * photos.length)

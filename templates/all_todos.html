@@ -1,43 +1,63 @@
 {% extends 'base.html' %}
 {% block title %}Todos{% endblock %}
 {% block body %}
+<nav class="nav mt-3">
+    <a class="nav-link nav-brand" href="/">Task Master</a>
+    <a class="nav-link" href='/create' style="text-decoration: none;"><i class="bi bi-cloud-plus-fill"></i>Create a new list </a>
+    <a class="nav-link " href="/logout" style="text-decoration: none;"><i class="bi bi-box-arrow-right"></i>Logout</a>
+    <a class="nav-link ms-auto" href="/change_password"><h5><i class="bi bi-person-fill"></i></h5>change password ?</a>
+</nav>
 <div class="detail">
-<h1>Todo list</h1>
-<p><a href='/create' style="text-decoration: none;">Create a new list </a></p>
-<table>
-    <thead>
+<h2 style="font-weight: bold">Todo lists</h2><br>
+<div class="filter">
+<label for="category_filter">Filter by category:</label>
+<select id="category_filter" name="category_filter">
+    <option value="">All categories</option>
+    {% for category in categories %}
+    <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+    {% endfor %}
+</select>
+</div>
+<br><br>
+<table class="table table-hover table-sm" id="myTable">
+    <thead class="table-primary" >
     <tr>
-        <th><h2>Description</h2></th>
-        <th><h2>Notes</h2></th>
-        <th><h2>Category</h2></th>
-        <th><h2>Actions</h2></th>
+        <th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(1)')" style="cursor:pointer"><h4>Description<i class="fas fa-sort" id="sort"></i></h4></th>
+        <th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(2)')" style="cursor:pointer"><h4>Notes<i class="fas fa-sort" id="sort"></i></h4></th>
+        <th onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(3)')" style="cursor:pointer"><h4>Category<i class="fas fa-sort" id="sort"></i></h4></th>
+        <th><h4>Action</h4></th>
     </tr>
     </thead>
     <tbody>
-        {% for todo in todos %}
-    <tr>
-        <td>
-        <a href="/todos/{{ todo.todo_list_id }}"style="text-decoration: none;">
-        {{ todo.description }}</a></td>
-        <td>{{ todo.notes }}</td>
-        {% if todo.categories %}
-        <td>{{ todo.categories.category_name }}</td>
-        {% else %}
-        <td>No category assigned</td>
-        {% endif %}
-        <td>
-            <form action="/delete_todo/{{ todo.todo_list_id}}" method="POST">
-                <button class="delete-todo" type="submit" todo_list_id="{{ todo.todo_list_id }}">Delete</button>
-            </form>
-        </td>
+      {% for todo in todos %}
+        <tr class="item todo-row {{'checked' if all_completed[todo]}}" id="{{todo.todo_list_id}}">
 
-    </tr>
-        {% endfor %}
+          <td >
+            <a href="/todos/{{ todo.todo_list_id }}"style="text-decoration: none;">
+              <i class="bi bi-pencil-fill"></i>{{ todo.description }}</a>
+          </td>
+          <td >{{ todo.notes }}</td>
+          {% if todo.categories %}
+          <td id="category-{{ todo.todo_list_id }}" data-categoryname="{{ todo.categories.category_name }}">{{ todo.categories.category_name }}</td>
+          {% else %}
+          <td>No category assigned</td>
+          {% endif %}
+          <td>
+            <form class="delte-btn" action="/delete_todo/{{ todo.todo_list_id}}" method="POST">
+              <button class="delete-todo" type="submit" todo_list_id="{{ todo.todo_list_id }}" description="{{ todo.description}}"><i class="bi bi-trash"></i>Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+
     </tbody>
 </table>
 </div>
 
+
+
 <script src="/static/todo.js"> </script>
+<script src="/static/filter.js"> </script>
 
 
 

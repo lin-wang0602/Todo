@@ -1,26 +1,24 @@
 body {
-    background: url('/static/images/homepage.jpg');
     background-size: cover;
-    color: lightcoral;
+    color: white;
     text-align: center;
   }
-
-
-  .site-wrapper {
-    display: table;
-    width: 100%;
+  html,body{
     height: 100%;
-    margin-top: 300px;
   }
+  .position-relative {
+    position: relative;
+}
 
-  .site-wrapper-inner {
-    display: table-cell;
-    vertical-align: middle;
-  }
+.text-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
 
-
-  footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
+.category {
+    position: relative;
+    z-index: 0;
+}

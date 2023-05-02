@@ -5,7 +5,8 @@ deleteButtons.forEach(button => {
   button.addEventListener('click', (event) => {
     event.preventDefault();
     const todoListId = button.getAttribute('todo_list_id');
-    const confirmDelete = confirm('Are you sure you want to delete this todo list?');
+    const todoDescri = button.getAttribute('description');
+    const confirmDelete = confirm(`Are you sure you want to delete this todo list : "${todoDescri}"?`);
     if (confirmDelete){
     fetch('/delete_todo/' + todoListId, { method: 'POST' }) // call to the server to delete todo list with given todoListId
       .then(response => {
@@ -32,6 +33,8 @@ createAccount.style.display = "none";
 createUserForm.style.display = "none";
 
 createUserButton.addEventListener("click", () => {
+  createUserButton.style.backgroundColor = "#4285F4"
+  loginButton.style.backgroundColor = "#E0E0E0"
   createAccount.style.display = "block";
   createUserForm.style.display = "block";
   loginForm.style.display = "none";
@@ -39,6 +42,8 @@ createUserButton.addEventListener("click", () => {
 });
 
 loginButton.addEventListener("click", () => {
+  loginButton.style.backgroundColor = "#4285F4"
+  createUserButton.style.backgroundColor = "#E0E0E0"
   createAccount.style.display = "none";
   createUserForm.style.display = "none";
   loginForm.style.display = "block";
