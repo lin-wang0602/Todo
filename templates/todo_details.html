@@ -8,16 +8,16 @@
     <a class="nav-link ms-auto" href="/change_password"><h5><i class="bi bi-person-fill"></i></h5>change password ?</a>
 </nav>
 <div class="detail mt-5">
-<h2>List Name: {{ todo.description}}</h1>
+<h2>List Title: {{ todo.description}}</h1>
 <img id="todo" src="{{ todo.img }}"><br>
 
 <table class="table table-hover table-sm">
     <thead class="table-primary">
     <tr>
-        <th ><h4>Todo Item</h4></th>
-        <th><h4>Due date</h4></th>
-        <th><h3>Completed</h4></th>
-        <th><h4>Action</h4></th>
+        <th ><h5>Todo Item</h5></th>
+        <th><h5>Due date</h5></th>
+        <th><h5>Completed</h5></th>
+        <th><h5>Action</h5></th>
     </tr>
     </thead>
     <tbody>
@@ -32,5 +32,8 @@
     </tbody>
 </table>
 </div>
+
+
 <script src="/static/dueDate.js"></script>
+
 {% endblock %}

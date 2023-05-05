@@ -8,6 +8,7 @@ th{
 }
 h2{
   font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
 }
 .nav-link{
   color:rgb(94, 91, 91);
@@ -67,13 +68,22 @@ form p{
     margin:10px;
 
 }
-input[type=text],input[type=password]{
+input[type=text],input[type=password],input[type=datetime-local]{
     border:none;
     border-radius: 3px;
     padding: 10px;
     margin: 5px;
     background-color: #f2f2f2;
     box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+}
+select[name=category]{
+  border:none;
+  border-radius: 3px;
+  padding: 10px;
+  margin: 5px;
+  background-color: #f2f2f2;
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+
 }
 input[type=submit] {
     background-color: #4CAF50;
@@ -158,10 +168,10 @@ html,body{
 
 }
 #category_filter {
-  padding: 5px 9px;
+  padding: 5px 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 15px;
   font-family: Arial, sans-serif;
   color: #333;
 }
