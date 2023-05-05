@@ -43,11 +43,8 @@ def change_password():
             user.password = new_password
             db.session.commit()
             flash('Updated password suceessfully!')
-            return jsonify({'success': True})
-        else:
-            return jsonify({'success': False, 'message': 'Current password is incorrect'})
-    else:
-        return render_template('change_pass.html')
+            return redirect("/todos")
+    return render_template('change_pass.html')
 
 @app.route("/users", methods=["POST"])
 def register_user():
