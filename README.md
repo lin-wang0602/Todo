@@ -24,7 +24,7 @@ delete the list, fitering, sorting
 
 ## About the Developer
 
-Task Master was created by Lin Wang, a software engineer in New York, NY. Learn more about the developer on [LinkedIn](www.linkedin.com/in/linwang96).
+Task Master was created by Lin Wang, a software engineer in New York, NY. Learn more about the developer on [LinkedIn](https://www.linkedin.com/in/linwang96).
 
 ## Technologies
 
